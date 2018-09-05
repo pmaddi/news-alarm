@@ -1,0 +1,161 @@
+html, body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    height: 100%;
+    min-height:100%;
+    width: 100%;
+}
+
+.center-container {
+    margin-bottom: 1rem;
+    text-align:center;
+    width: 100%;
+}
+
+.subheader {
+    color: #24323D;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height:1.25;
+}
+
+p {
+    font-size: 0.7rem;
+    text-align:justify;
+}
+
+a {
+    color:#095CB2;
+    text-decoration: none;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* BUTTONS */
+
+button:not([disabled]) {
+    cursor: pointer;
+}
+
+.btn {
+    font-size:1.3rem;
+}
+
+.danger-button {
+    background-color: #db3a34;
+    border-color: #db3a34;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 4px;
+    color: #FFF4E8;
+    font-weight:400;
+}
+
+.primary-button {
+    background-color:#095CB2;
+    border-color: #095CB2;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 4px;
+    color:#E8F4FF;
+    font-weight:400;
+}
+
+.primary-button:disabled {
+    background-color:#748494;
+    border-color:#748494;
+    color:#EEF0F2;
+}
+
+.btn:focus {
+    box-shadow: 0 0 0 0 rgba(0,123,255,0);
+    outline: 0;
+    outline-color: transparent;
+    outline-style: none;
+    outline-width: 0;
+}
+
+/* HEADER */
+
+.header {
+    background-color:#095CB2;
+    border-bottom:4px solid #095CB2;
+    border-top:4px solid #095CB2;
+    color: #E8F4FF;
+    font-family: 'Roboto', sans-serif;
+    font-weight:700;
+}
+
+.header a {
+    color: #E8F4FF;
+    text-decoration: none;
+}
+
+/* FOOTER */
+
+.footer {
+    color: #24323D;
+    font-size: 0.5rem;
+    padding-bottom:0.15rem;
+    padding-top:0.15rem;
+}
+
+.heart {
+    font-size: 0.4rem;
+    vertical-align:middle;
+}
+
+/* HOVER STYLES */
+
+.primary-button:hover:not([disabled]) {
+    background-color: #074B91;
+    font-weight:700;
+}
+
+.danger-button:hover:not([disabled]) {
+    background-color: #C50023;
+    font-weight:700;
+}
+
+.header:hover {
+    background-color: #074B91;
+    color: #E8F4FF;
+    font-weight:900;
+    text-decoration: none;
+}
+
+.header:hover a:hover {
+    color: #E8F4FF;
+}
+
+a:hover {
+    color: #074B91;
+    text-decoration: none;
+}
+
+/* PLACEHOLDERS */
+
+::-webkit-input-placeholder {
+   font-style: italic;
+}
+:-moz-placeholder {
+   font-style: italic;  
+}
+::-moz-placeholder {
+   font-style: italic;  
+}
+:-ms-input-placeholder {  
+   font-style: italic; 
+}
