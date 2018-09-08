@@ -1,7 +1,7 @@
+const TIME_KEY = "timer_time";
 // USER INPUTS
 var to_airport = '';
 var from_airport = '';
-var timer_date = '';
 var timer_time = '';
 
 function showResult() {
@@ -28,18 +28,28 @@ function showLoadingIndicator(loading_message) {
 }
 
 function loadClock() {
+    // Load cached value if a new value isn't provided
+    timer_time = $('#timer_time').val()
+    if (timer_time === undefined) {
+        timer_time = localStorage.getItem(TIME_KEY);
+    } else {
+        localStorage.setItem(TIME_KEY, timer_time);
+    }
+    console.log(timer_time);
+
     $(".content").html(`
         <div class='subheader center-container'>
             Clock
         </div>
         <div class='center-container'>
-            <button id='back' type="button" class="btn primary-button btn-lg w-100" onclick="getAlarmTime()">
-                Back
+            <button id='back' type="button" class="btn primary-button btn-lg w-100" onclick="getFreshAlarmTime()">
+                Change Alarm
             </button>
         </div>
         <div class='center-container'>
-            <img src="/static/img/spinner-1s-200px.gif"/>
-            <br/>
+            <div id='clock'>
+
+            </div>
 
         </div>
         </div>
@@ -55,15 +65,24 @@ function loadClock() {
 }
 
 
+function getFreshAlarmTime() {
+    localStorage.removeItem(TIME_KEY);
+    getAlarmTime();
+}
+
+
 function getAlarmTime() {
+    // Check for cached value
+    var timer_val = localStorage.getItem(TIME_KEY);
+    console.log(timer_val);
+    if (timer_val !== null) {
+        loadClock();
+        return;
+    }
     $(".content").html(`
         <div class='subheader center-container'>
             Set Up Alarm
         </div>
-        </div>
-        <div class='center-container'>
-            <label for="timer_date">Date</label>
-            <input id="timer_date" name="timer_date" class="w-100 datetimeinput" type="text" placeholder='MM/DD/YYYY'/>
         </div>
         <div class='center-container'>
             <label for="timer_time">Time</label>
@@ -76,7 +95,6 @@ function getAlarmTime() {
         </div>
     `);
 
-    $("#timer_date").datepicker();
     $("#timer_time").timepicker({
         timeFormat: 'HH:mm',
         dropdown: false,
@@ -84,8 +102,7 @@ function getAlarmTime() {
     });
 
     $(".datetimeinput").on("keyup", function(event) {
-        // enable proceeding to next input interface only when both date/time fields have input
-        let enable_button = ($('#timer_date').val().length >= 6) && ($('#timer_time').val().length >= 4);
+        let enable_button = $('#timer_time').val().length >= 4;
         $("#gettime-next").prop('disabled', !enable_button);
         if ((event.which == 13) && enable_button) {
             loadClock();
