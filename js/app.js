@@ -3,6 +3,7 @@ const TIME_KEY = "timer_time";
 var to_airport = '';
 var from_airport = '';
 var timer_time = '';
+var play_lock = false;
 
 function showResult() {
     $(".content").html(`
@@ -35,22 +36,49 @@ function loadClock() {
     } else {
         localStorage.setItem(TIME_KEY, timer_time);
     }
-    console.log(timer_time);
+
+    function pad(val) {
+        return ('0' + val.toString()).substr(0, 2);
+    }
+
+    function timeString() {
+        var currentdate = new Date();
+        return (currentdate.getHours() + ":"
+                + pad(currentdate.getMinutes()))
+    }
+
+    function checkRunAlarm(cb) {
+        if ($('#clock').text() == timer_time) {
+            if (!play_lock) {
+                play_lock = true;
+                cb();
+            }
+        } else {
+            play_lock = false;
+        }
+    }
+
+    function updateClock() {
+        checkRunAlarm(getNews);
+        $('#clock').text(timeString());
+    }
+
+    setInterval(updateClock, 1000);
 
     $(".content").html(`
-        <div class='subheader center-container'>
-            Clock
+        <div class='center-container'>
+            The time is now <span id='clock'>
+                ${timeString()}
+            </span>
+        </div>
+
+        <div class='center-container'>
+            The alarm is set to ${timer_time}
         </div>
         <div class='center-container'>
             <button id='back' type="button" class="btn primary-button btn-lg w-100" onclick="getFreshAlarmTime()">
                 Change Alarm
             </button>
-        </div>
-        <div class='center-container'>
-            <div id='clock'>
-
-            </div>
-
         </div>
         </div>
         <div class='center-container'>
